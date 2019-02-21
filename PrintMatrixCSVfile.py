@@ -30,5 +30,5 @@ header = csv_row("dataij",B)
 outfile.write(header)
 for i, coli in enumerate(A):
     rowi = csv_row(coli, DATA[i])
-        Outfilei.write(rowi)
-Outfilei.close()
+    Outfile.write(rowi)
+Outfile.close()
