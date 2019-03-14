@@ -24,7 +24,7 @@ noise = np.random.normal(0,1,10000)
 X = range(0,10000,1)  
 DATA = [] 
 for i, x in enumerate(X):
-  y = 0.001x**3 + noise[i]   
+  y = 0.001*x**3 + noise[i]   
 
 Sdata = smoothing_data(2, 2 , 5, DATA)
 
