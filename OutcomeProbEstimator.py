@@ -27,14 +27,14 @@ def Prob_Outcome(xi, Xm, std, L, type):
                 Px = 0
             else:
                 Px = 1
-        elif L == -1:
-            if xi <= Xm and xi >= (Xm - 4*std):
+        if L == -1:
+            if xi <= Xm and xi >= (Xm - 4*std) :
                 Px = float(scipy.stats.norm(Xm, std).pdf(xi)) / Pref
-            elif xi < (Xm - 4*std):
+            elif xi > Xm :
                 Px = 1
-            else:
+            elif xi < (Xm - 4*std) :
                 Px = 0
-        elif L == 0:
+        if L == 0:
             if xi > (Xm - 4*std) and xi < (Xm + 4*std):
                 Px = float(scipy.stats.norm(Xm, std).pdf(xi)) / Pref
             else:
@@ -58,10 +58,10 @@ for x in samples:
 
 print "\nExample 2: probability of having a specific type of blood disorder, considering left tail"
 for x in samples:
-    Px = Prob_Outcome(x, 368 , 6 , -1, 1 )
+    Px = Prob_Outcome(x, 368 , 6 , -1, 0 )
     print "p (" , x , ") = ", Px
 
-print "\n Example 3: probability of having a specific type of blood disorder, considering left tail"
+print "\n Example 3: probability of having a specific type of blood disorder, considering right tail"
 for x in samples:
     Px = Prob_Outcome(x, 368 , 6 , 1, 1 )
     print "p (" , x , ") = ", Px
