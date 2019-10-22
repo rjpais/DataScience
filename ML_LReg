@@ -1,0 +1,69 @@
+""" 
+MACHINE LEARNING Example of Linear regression modelling using sklearn
+In this example we model data of handball players in attempt to predict the relation between players height and the goal
+
+Here, it is used the fallowing data from 2018 team of IFTC
+handball players heights of a team
+number of total scored goal in the season for each player
+ 
+"""
+
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn import datasets, linear_model
+
+# STEP 1  :  import datasets for an handball team
+
+Size = [170 , 177, 185, 188, 166, 192, 181, 207, 188, 185, 173, 189, 194, 199 ]
+Goals = [12,20, 33, 39, 15, 45, 55, 50, 61, 58, 37, 29, 59, 45 ]
+print ("number of field players = ", len(Goals))
+
+# reshape the input of independent variable
+SizeR = np.array(Size).reshape((-1,1))  # this generates a list of lists where each row as only one item in it 
+print (" \n Reshaped variable format:\n",  SizeR )
+
+
+# STEP 2  : Fitting the linear regression model to data
+
+reg = linear_model.LinearRegression()
+reg.fit(SizeR, Goals)
+print ("Coeficients: n\ ", reg.coef_  )
+print ("Intercept: n\ ", reg.intercept_) 
+
+
+# Ploting initial data 
+plt.xlabel('Height in cm ')
+plt.ylabel('2018 Season goals')
+plt.title("Players heigh relation with scoring capacity ")
+plt.grid(True)
+plt.plot(Size, Goals, "bp")
+
+
+# STEP 3  : making a prediction based on liner regression model
+Size_new = 197 
+GOALS = (Size_new*reg.coef_) + reg.intercept_
+print ("Predicted goals = " , int(round(GOALS[0], 0) ) )
+
+# Alternative way of making a prediction based on liner regression model
+GOALS2 = reg.predict ([[Size_new]])
+print ("Predicted goals = " , int(round(GOALS2[0], 0) ) )
+
+# Implement the linear model in a function for training the model
+
+def Lmodel(formula, xRange):
+    x = np.array(xRange)
+    y = eval(formula)
+    plt.plot(x, y, 'r')
+
+# SEPT 4 : ploting the prediction on the data
+
+Lmodel('reg.coef_*x + reg.intercept_', range(150, 220))
+plt.scatter(Size, Goals, color = 'blue')
+plt.xlabel('Height in cm ')
+plt.ylabel('2018 Season goals')
+plt.title("Players heigh relation with scoring capacity ")
+plt.grid(True)
+plt.show()
+
+
+
